@@ -13,11 +13,12 @@ const Home = () => {
     const res = await fetch(url);
     const data = await res.json();
 
-    setTopMovies(data);
+    setTopMovies(data.results);
   };
 
   useEffect(() => {
-    const getTopRatedUrl = `http://localhost:3000/top_rated`;
+    const getTopRatedUrl = `${moviesURL}top_rated?${apiKey}`;
+
     getTopRatedMovies(getTopRatedUrl);
   }, []);
 
