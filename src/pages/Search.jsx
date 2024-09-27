@@ -21,7 +21,7 @@ const Search = () => {
   };
 
   useEffect(() => {
-    const searchWithQueryURL = `${searchURL}?${apiKey}&query=${query}`;
+    const searchWithQueryURL = `http://localhost:3000/search`;
 
     getSearchedMovies(searchWithQueryURL);
   }, []);
