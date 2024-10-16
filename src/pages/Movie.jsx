@@ -33,7 +33,7 @@ const Movie = () => {
   };
 
   useEffect(() => {
-    const movieUrl = `http://localhost:3000/movie`;
+    const movieUrl = `http://localhost:3000/movie?movieId=${id}`;
     getMovie(movieUrl);
   }, []);
 
