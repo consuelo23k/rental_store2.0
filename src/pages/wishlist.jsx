@@ -7,10 +7,18 @@ const Wishlist = () => {
 
   const fetchWishlist = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/wishlist");
-      setWishlist = response.data;
+      const response = await axios.get(
+        "http://localhost:3000/wishlist/details"
+      );
+      const data = response.data;
+
+      if (data.results && Array.isArray(data.results)) {
+        setWishlist(data.results);
+      } else {
+        console.error("Formato inesperado de resposta da API:", data);
+      }
     } catch (error) {
-      console.error("Erro ao buscar a wishlist:", error);
+      console.error("Erro ao buscar a wishlist:", error.message);
     }
   };
 
@@ -20,7 +28,7 @@ const Wishlist = () => {
 
       setWishlist((prev) => prev.filter((movie) => movie.id !== movieId));
     } catch (error) {
-      console.error("Erro ao remover o filme da wishlist:", error);
+      console.error("Erro ao remover o filme da wishlist:", error.message);
     }
   };
 
@@ -36,14 +44,26 @@ const Wishlist = () => {
       ) : (
         <ul className="wishlist-list">
           {wishlist.map((movie) => (
-            <li key={movie.id} className="wishlist-item">
-              <span className="wishlist-title">{movie.title}</span>
-              <button
-                className="remove-button"
-                onClick={() => removeFromWishlist(movie.id)}
-              >
-                Remover
-              </button>
+            <li key={movie.id || movie.title} className="wishlist-item">
+              {/* Garantir que o campo `poster_path` esteja disponível */}
+              {movie.poster_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                  alt={movie.title || "Sem título"}
+                  className="wishlist-poster"
+                />
+              ) : (
+                <div className="no-poster">Sem imagem</div>
+              )}
+              <div className="wishlist-details">
+                <h4>{movie.title || "Sem título"}</h4>
+                <button
+                  className="remove-button"
+                  onClick={() => removeFromWishlist(movie.id)}
+                >
+                  Remover
+                </button>
+              </div>
             </li>
           ))}
         </ul>

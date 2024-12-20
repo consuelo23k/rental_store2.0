@@ -4,7 +4,7 @@
   align-items: center;
   padding: 10px 20 px;
   background-color: #333;
-  color: white;
+  color: rgb(196, 183, 5);
 }
 
 #navbar h2 {
@@ -12,7 +12,7 @@
 }
 
 #navbar a {
-  color: white;
+  color: rgb(167, 179, 3);
   text-decoration: none;
 }
 

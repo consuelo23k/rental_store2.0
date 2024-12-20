@@ -7,29 +7,36 @@ const imagesURL = import.meta.env.VITE_IMG;
 
 const MovieCard = ({ movie, showLink = true }) => {
   const [watched, setWatched] = useState(movie.watched);
-  const [isInWishlist, setIsInWishlist] = useState(movie.isInWishlist || false);
+  const [isInWishlist, setIsInWishlist] = useState(movie.inWishlist || false);
 
   const handleWatchedChange = async (movie_id) => {
     if (watched === false) {
       await axios.post(
-        `http://localhost:3000/filmeAssistido?movieId=${movie_id}`
+        `http://localhost:3000/filmeAssistido/add?movieId=${movie_id}`
       );
       setWatched(true);
     } else {
       await axios.delete(
-        `http://localhost:3000/filmeNaoAssistido?movieId=${movie_id}`
+        `http://localhost:3000/filmeNaoAssistido/remove?movieId=${movie_id}`
       );
       setWatched(false);
     }
   };
   const toggleWishlist = async (movie_id) => {
-    if (isInWishlist) {
-      await axios.delete(
-        `http://localhost:3000/removeWishlist?movieId=${movie_id}`
-      );
-      setIsInWishlist(false);
-    } else {
-      await axios.post(`http://localhost:3000/addWishlist?movieId=${movie_id}`);
+    try {
+      if (isInWishlist) {
+        const response = await axios.delete(
+          `http://localhost:3000/wishlist/remove?movieId=${movie_id}`
+        );
+        if (response.status === 200) setIsInWishlist(false);
+      } else {
+        const response = await axios.post(
+          `http://localhost:3000/wishlist/add?movieId=${movie_id}`
+        );
+        if (response.status === 200) setIsInWishlist(true);
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar a wishlist:", error);
     }
   };
 
@@ -53,7 +60,7 @@ const MovieCard = ({ movie, showLink = true }) => {
         style={{ background: "none", border: "none", cursor: "pointer" }}
       >
         {isInWishlist ? (
-          <FaRegStar color="gold" size={24} />
+          <FaStar color="gold" size={24} />
         ) : (
           <FaRegStar color="gold" size={24} />
         )}
