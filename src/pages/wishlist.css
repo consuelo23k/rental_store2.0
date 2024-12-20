@@ -4,7 +4,7 @@
   align-items: center;
   padding: 10px 20 px;
   background-color: #333;
-  color: rgb(196, 183, 5);
+  color: #f7d354(196, 183, 5);
 }
 
 #navbar h2 {
@@ -12,7 +12,7 @@
 }
 
 #navbar a {
-  color: rgb(167, 179, 3);
+  color: #f7d354(167, 179, 3);
   text-decoration: none;
 }
 
@@ -71,5 +71,5 @@ button:hover {
 }
 
 .menu-dropdown a:hover {
-  color: #ff4c4c;
+  color: #f7d354;
 }

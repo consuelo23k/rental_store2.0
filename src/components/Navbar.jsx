@@ -51,6 +51,9 @@ const Navbar = () => {
           <li>
             <Link to="/about">Filmes Assistidos</Link>
           </li>
+          <li>
+            <Link to="/about">Sobre</Link>
+          </li>
         </ul>
       )}
     </nav>

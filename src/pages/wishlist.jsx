@@ -24,9 +24,18 @@ const Wishlist = () => {
 
   const removeFromWishlist = async (movieId) => {
     try {
-      await axios.delete(`http://localhost:3000/wishlist/remove/${movieId}`);
+      console.log("Antes de remover:", wishlist);
 
-      setWishlist((prev) => prev.filter((movie) => movie.id !== movieId));
+      await axios.delete(
+        `http://localhost:3000/wishlist/remove?movieId=${movieId}`
+      );
+
+      setWishlist((prev) => {
+        console.log("Estado anterior no setWishlist:", prev);
+        const updatedWishlist = prev.filter((movie) => movie.id !== movieId);
+        console.log("Depois de filtrar:", updatedWishlist);
+        return updatedWishlist;
+      });
     } catch (error) {
       console.error("Erro ao remover o filme da wishlist:", error.message);
     }
