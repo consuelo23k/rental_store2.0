@@ -24,18 +24,11 @@ const Wishlist = () => {
 
   const removeFromWishlist = async (movieId) => {
     try {
-      console.log("Antes de remover:", wishlist);
-
       await axios.delete(
         `http://localhost:3000/wishlist/remove?movieId=${movieId}`
       );
 
-      setWishlist((prev) => {
-        console.log("Estado anterior no setWishlist:", prev);
-        const updatedWishlist = prev.filter((movie) => movie.id !== movieId);
-        console.log("Depois de filtrar:", updatedWishlist);
-        return updatedWishlist;
-      });
+      setWishlist((prev) => prev.filter((movie) => movie.id !== movieId));
     } catch (error) {
       console.error("Erro ao remover o filme da wishlist:", error.message);
     }
@@ -47,14 +40,14 @@ const Wishlist = () => {
 
   return (
     <div className="wishlist-container">
-      <h2>Minha Wishlist</h2>
+      <h2 className="wishlist-h2">Minha Wishlist</h2>
       {wishlist.length === 0 ? (
         <p className="empty-message">Sua lista de desejos está vazia.</p>
       ) : (
         <ul className="wishlist-list">
           {wishlist.map((movie) => (
-            <li key={movie.id || movie.title} className="wishlist-item">
-              {/* Garantir que o campo `poster_path` esteja disponível */}
+            <li key={movie.id} className="wishlist-item">
+              {/* Card do Filme */}
               {movie.poster_path ? (
                 <img
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -64,15 +57,17 @@ const Wishlist = () => {
               ) : (
                 <div className="no-poster">Sem imagem</div>
               )}
+              {/* Detalhes do Filme */}
               <div className="wishlist-details">
-                <h4>{movie.title || "Sem título"}</h4>
-                <button
-                  className="remove-button"
-                  onClick={() => removeFromWishlist(movie.id)}
-                >
-                  Remover
-                </button>
+                <h4 className="movie-title">{movie.title || "Sem título"}</h4>
               </div>
+              {/* Botão Remover */}
+              <button
+                className="remove-button"
+                onClick={() => removeFromWishlist(movie.id)}
+              >
+                Remover
+              </button>
             </li>
           ))}
         </ul>

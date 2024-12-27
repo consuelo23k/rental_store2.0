@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import axios from "axios";
+import "./MovieCard.css";
 
 const imagesURL = import.meta.env.VITE_IMG;
 
@@ -10,7 +11,7 @@ const MovieCard = ({ movie, showLink = true }) => {
   const [isInWishlist, setIsInWishlist] = useState(movie.inWishlist || false);
 
   const handleWatchedChange = async (movie_id) => {
-    if (watched === false) {
+    if (!watched) {
       await axios.post(
         `http://localhost:3000/filmeAssistido/add?movieId=${movie_id}`
       );
@@ -22,6 +23,7 @@ const MovieCard = ({ movie, showLink = true }) => {
       setWatched(false);
     }
   };
+
   const toggleWishlist = async (movie_id) => {
     try {
       if (isInWishlist) {
@@ -41,31 +43,42 @@ const MovieCard = ({ movie, showLink = true }) => {
   };
 
   return (
-    <div className="movie_card">
-      <img src={imagesURL + movie.poster_path} alt={movie.title} />
-      <h2>{movie.title}</h2>
-      <p>
+    <div className="movie-card">
+      <img
+        className="movie-card-image"
+        src={imagesURL + movie.poster_path}
+        alt={movie.title}
+      />
+      <h2 className="movie-card-title">
+        {movie.title}
+        <button
+          onClick={() => toggleWishlist(movie.id)}
+          className="movie-card-star-button"
+        >
+          {isInWishlist ? (
+            <FaStar className="movie-card-star" />
+          ) : (
+            <FaRegStar className="movie-card-star" />
+          )}
+        </button>
+      </h2>
+      <p className="movie-card-rating">
         <FaStar /> {movie.vote_average}
       </p>
-      <label>
+      <label className="movie-card-label">
         <input
+          className="movie-card-checkbox"
           type="checkbox"
           checked={watched}
           onChange={() => handleWatchedChange(movie.id)}
         />
         Marcar como assistido
       </label>
-      <button
-        onClick={() => toggleWishlist(movie.id)}
-        style={{ background: "none", border: "none", cursor: "pointer" }}
-      >
-        {isInWishlist ? (
-          <FaStar color="gold" size={24} />
-        ) : (
-          <FaRegStar color="gold" size={24} />
-        )}
-      </button>
-      {showLink && <Link to={`/movie/${movie.id}`}>Detalhes</Link>}
+      {showLink && (
+        <Link className="movie-card-details-link" to={`/movie/${movie.id}`}>
+          Detalhes
+        </Link>
+      )}
     </div>
   );
 };

@@ -16,18 +16,7 @@
   text-decoration: none;
 }
 
-form {
-  display: flex;
-  gap: 10px;
-}
-
-input {
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-button {
+.remove-button {
   background-color: #ff4c4c;
   color: white;
   border: none;
@@ -36,7 +25,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.remove-button:hover {
   background-color: #ff1a1a;
 }
 
@@ -72,4 +61,87 @@ button:hover {
 
 .menu-dropdown a:hover {
   color: #f7d354;
+}
+
+.wishlist-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.wishlist-h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.empty-message {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+}
+
+.wishlist-list {
+  list-style: none;
+  padding: 0;
+}
+
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  height: 120px;
+}
+
+.wishlist-poster {
+  width: 80px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.no-poster {
+  width: 80px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ddd;
+  border-radius: 4px;
+  color: #666;
+  font-size: 14px;
+}
+
+.wishlist-details {
+  flex: 1;
+  margin-left: 10px;
+  text-align: left;
+}
+
+.movie-title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+.remove-button {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.remove-button:hover {
+  background: #e03e3e;
 }
