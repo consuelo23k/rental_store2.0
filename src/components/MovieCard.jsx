@@ -72,7 +72,7 @@ const MovieCard = ({ movie, showLink = true }) => {
           checked={watched}
           onChange={() => handleWatchedChange(movie.id)}
         />
-        Marcar como assistido
+        Assistido
       </label>
       {showLink && (
         <Link className="movie-card-details-link" to={`/movie/${movie.id}`}>
