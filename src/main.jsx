@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import Search from "./pages/Search";
 import Wishlist from "./pages/wishlist";
-
+import FilmeAssistido from "./pages/filmeAssistido";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -19,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="movie/:id" element={<Movie />} />
           <Route path="Search" element={<Search />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/filmes-assistidos" element={<FilmeAssistido />} />
         </Route>
       </Routes>
     </BrowserRouter>

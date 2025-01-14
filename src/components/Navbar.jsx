@@ -49,7 +49,7 @@ const Navbar = () => {
             <Link to="/wishlist">Wishlist</Link>
           </li>
           <li>
-            <Link to="/about">Filmes Assistidos</Link>
+            <Link to="/filmes-assistidos">Filmes Assistidos</Link>
           </li>
           <li>
             <Link to="/about">Sobre</Link>
