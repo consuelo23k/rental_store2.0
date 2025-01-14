@@ -18,7 +18,7 @@ const MovieCard = ({ movie, showLink = true }) => {
       setWatched(true);
     } else {
       await axios.delete(
-        `http://localhost:3000/filmeNaoAssistido/remove?movieId=${movie_id}`
+        `http://localhost:3000/filmeAssistido/remove?movieId=${movie_id}`
       );
       setWatched(false);
     }
